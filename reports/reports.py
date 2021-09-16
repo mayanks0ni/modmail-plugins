@@ -11,7 +11,7 @@ class Report(commands.Cog):
     
     def __init__(self, bot):
         self.bot = bot
-        self.db = bot.api.get_plugin_partition(self)
+        self.db = bot.plugin_db.get_partition(self)
 
     @commands.command(aliases=["rchannel"])
     @checks.has_permissions(PermissionLevel.MODERATOR)
@@ -56,7 +56,7 @@ class Report(commands.Cog):
         embed.add_field(name="Reason", value=reason, inline=False)
 
         await setchannel.send(report_mention, embed=embed)
-        await ctx.send("Succesfully reported the user!")
+        await ctx.send("Report submitted for mods to review.\nPlease refrain from making duplicate reports.")
                         
 def setup(bot):
     bot.add_cog(Report(bot))
